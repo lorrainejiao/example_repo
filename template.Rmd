@@ -1,0 +1,60 @@
+---
+title: "Simple document"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r, message = FALSE}
+library(tidyverse)
+
+## load the packages will be used in the following chunks
+## meesage FALSE = code chunk invisible
+```
+
+
+I'm an R Markdown document! 
+
+# Section 1
+
+Here's a **code chunk** that samples from 
+a _normal distribution_:
+
+```{r}
+samp = rnorm(100)
+length(samp)
+```
+
+# Section 2
+
+I can take the mean of the sample, too!
+The mean is `r mean(samp)`.
+
+```{r new_code_chuck}  
+# naming a code chuck
+```
+
+# Section 3
+This code chunk imports the `tidyverse`, creates a data frame, and makes a histogram. 
+
+```{r, echo = FALSE, collapse = TRUE}
+#echo = do you want to see your code or not? 
+#
+```
+
+```{r}
+set.seed(2)
+
+la_df =
+  tibble(
+    norm_samp = rnorm(500, mean = 1), 
+    norm_samp_pos = norm_samp > 1, 
+    abs_norm_samp = abs(norm_samp)
+  )
+
+ggplot(la_df, aes(x = abs_norm_samp)) + geom_histogram()
+
+median_samp = median(pull(la_df, norm_samp))
+
+```
+
